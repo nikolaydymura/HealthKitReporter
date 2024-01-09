@@ -52,6 +52,10 @@ extension Metadata: Payload {
         if let doubleDictionary = dictionary as? [String: Double] {
             return Metadata.double(dictionary: doubleDictionary)
         }
-        throw HealthKitError.invalidValue("Invalid dictionary: \(dictionary)")
+        var temp: [String: String] = [:]
+        for (k, v) in dictionary {
+            temp[k] = "\(v)"
+        }
+        return Metadata.string(dictionary: temp)
     }
 }
